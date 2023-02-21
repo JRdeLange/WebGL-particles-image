@@ -1,8 +1,0 @@
-#square {
-    width: 200px;
-    height: 200px;
-    border: 2px solid;
-    border-color: red;
-    background-color: blue;
-    transform: rotate(48deg)
-}
