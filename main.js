@@ -1,7 +1,6 @@
-import Particledata from "http://localhost:5500/Hardware particles/particledata.js"
-import WebGLRenderer from "http://localhost:5500/Hardware particles/webgl_renderer.js"
-import Mover from "http://localhost:5500/Hardware particles/mover.js"
-import Pixels from "http://localhost:5500/Hardware particles/pixels.js"
+import Particledata from "./particledata.js"
+import WebGLRenderer from "./webgl_renderer.js"
+import Pixels from "./pixels.js"
 
 
 // get HTML5 canvas
@@ -27,7 +26,7 @@ window.addEventListener('mousemove', function(event) {
 
 
 // load sampling image
-let image = new Pixels("http://localhost:5500/Moving particles/test.png", image_is_loaded)
+let image = new Pixels("./test.png", image_is_loaded)
 
 // Image is now loaded
 function image_is_loaded(){

@@ -1,4 +1,4 @@
-import { vertex_source, fragment_source } from "http://localhost:5500/Hardware particles/shaders.js"
+import { vertex_source, fragment_source } from "./shaders.js"
 
 export default class WebGLRenderer{
 
