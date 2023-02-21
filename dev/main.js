@@ -17,21 +17,12 @@ const mouse = {
 };
 
 // Update mouse position
-function updateMousePosition(event) {
-    let x, y;
-    if (event.type === 'touchmove') {
-        x = event.touches[0].clientX - canvas_rect.left;
-        y = event.touches[0].clientY - canvas_rect.top;
-    } else {
-        x = event.clientX - canvas_rect.left;
-        y = event.clientY - canvas_rect.top;
-    }
+window.addEventListener('mousemove', function(event) {
+    let x = event.x - canvas_rect.left;
+    let y = event.y - canvas_rect.top;
     mouse.x = (x / canvas.width) * 2 - 1;
     mouse.y = (y / canvas.height) * 2 - 1;
-}
-
-window.addEventListener('mousemove', updateMousePosition);
-window.addEventListener('touchmove', updateMousePosition);
+});
 
 
 // load sampling image
