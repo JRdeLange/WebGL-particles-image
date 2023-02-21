@@ -10,13 +10,18 @@ canvas.height = window.innerHeight;
 
 const canvas_rect = canvas.getBoundingClientRect();
 
-//Define mouse object to store cursor postition
+// Prevent site from scrolling on phones
+document.body.addEventListener('touchmove', function(event) {
+    event.preventDefault();
+}, { passive: false });
+
+// Define mouse object to store cursor postition
 const mouse = {
     x: 0,
     y: 0,
 };
 
-// Update mouse position
+// Update mouse/touch position
 function updateMousePosition(event) {
     let x, y;
     if (event.type === 'touchmove') {
