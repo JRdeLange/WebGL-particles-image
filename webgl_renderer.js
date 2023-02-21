@@ -34,7 +34,7 @@ export default class WebGLRenderer{
     draw(time) {
         this.set_uniforms(time);
         
-        this.print_framerate(time);
+        // this.print_framerate(time);
 
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.position_buffer);
         this.gl.drawArrays(this.gl.POINTS, 0, this.particle_data.nr);

@@ -2,7 +2,6 @@ import Particledata from "./particledata.js"
 import WebGLRenderer from "./webgl_renderer.js"
 import Pixels from "./pixels.js"
 
-
 // get HTML5 canvas
 let canvas = document.getElementById("canvas");
 canvas.width = window.innerWidth;
@@ -16,15 +15,16 @@ document.body.addEventListener('touchmove', function(event) {
 }, { passive: false });
 
 // Define mouse object to store cursor postition
+// Initialize to off screen
 const mouse = {
-    x: 0,
-    y: 0,
+    x: -10000,
+    y: -10000,
 };
 
 // Update mouse/touch position
 function updateMousePosition(event) {
     let x, y;
-    if (event.type === 'touchmove') {
+    if (event.type == 'touchmove') {
         x = event.touches[0].clientX - canvas_rect.left;
         y = event.touches[0].clientY - canvas_rect.top;
     } else {
@@ -33,6 +33,8 @@ function updateMousePosition(event) {
     }
     mouse.x = (x / canvas.width) * 2 - 1;
     mouse.y = (y / canvas.height) * 2 - 1;
+
+    // Spawn particles if mouse button is held
 }
 
 window.addEventListener('mousemove', updateMousePosition);
@@ -67,15 +69,14 @@ function image_is_loaded(){
         y += Math.random() - 5
 
         // scale x and y values
-        x = x / image.pixels.length * 2 - 1
-        y = y / image.pixels[0].length * 2 - 1
+        let pos = scale_x_y(x, y)
             
         //generating random values for particle properties
         let random_color = Math.floor(Math.random() * color_array.length);
 
         //generating new particle in particle array
 
-        particle_data.add_particle([x, y], color_array[random_color])      
+        particle_data.add_particle(pos, color_array[random_color])      
     }
 
     // Draw particles
@@ -89,4 +90,14 @@ function image_is_loaded(){
         renderer.draw(time)
         window.requestAnimationFrame(draw)
     }
+}
+
+function scale_x_y(x, y) {
+    x = x / image.pixels.length * 2 - 1
+    y = y / image.pixels[0].length * 2 - 1
+    return [x, y]
+}
+
+function spawn_particles() {
+
 }

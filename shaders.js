@@ -35,7 +35,7 @@ export const vertex_source = `
     // Set new position
     gl_Position = vec4(posxy, 0.0, 1.0);
 
-    // Size grows and shrinks using a sign with a random offset
+    // Size grows and shrinks using a sine with a random offset
     gl_PointSize = (sin(time + (random_nrs.x * 2.0 * 3.1415)) * 5.0) + 1.0;
     
     // Color is color
