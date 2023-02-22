@@ -33,8 +33,8 @@ export const vertex_source = `
     }
 
     // Random position wandering
-    posxy.x += sin(posxy.y * 7.0 * 3.1415 + time * 3.1415 + random_nrs.y / 2.0) / (39.0 + random_nrs.x);
-    posxy.y += sin(posxy.x * 7.0 * 3.1415 + time * 3.1415 + random_nrs.z / 2.0) / (39.0 + random_nrs.x);
+    posxy.x += sin(posxy.y * 7.0 * 3.1415 + time * 3.1415 + random_nrs.y / 1.5) / (53.0 + random_nrs.x * 7.0);
+    posxy.y += sin(posxy.x * 7.0 * 3.1415 + time * 3.1415 + random_nrs.z / 1.5) / (53.0 + random_nrs.x * 7.0);
 
     // Set new position
     gl_Position = vec4(posxy, 0.0, 1.0);
