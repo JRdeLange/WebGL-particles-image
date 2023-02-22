@@ -6,6 +6,7 @@ import Pixels from "./pixels.js"
 
 const get_color_from_image = true;
 const random_positions = false;
+const image_name = "canyon.png";
 
 // get HTML5 canvas
 let canvas = document.getElementById("canvas");
@@ -47,7 +48,7 @@ window.addEventListener('touchmove', updateMousePosition);
 
 
 // load sampling image
-let image = new Pixels("./canyon.png", image_is_loaded)
+let image = new Pixels("./"+image_name, image_is_loaded)
 
 // Image is now loaded
 function image_is_loaded(){
