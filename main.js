@@ -6,9 +6,6 @@ import Pixels from "./pixels.js"
 
 const get_color_from_image = true;
 
-
-
-
 // get HTML5 canvas
 let canvas = document.getElementById("canvas");
 canvas.width = window.innerWidth;
@@ -66,7 +63,7 @@ function image_is_loaded(){
         let x = Math.floor(Math.random() * image.pixels.length)
         let y = Math.floor(Math.random() * image.pixels[0].length)
 
-        while (!get_color_from_image && Math.random() < image.pixels[x][y][0]) {
+        while (!get_color_from_image && Math.random() < average(image.pixels[x][y])) {
             x = Math.floor(Math.random() * image.pixels.length)
             y = Math.floor(Math.random() * image.pixels[0].length)
         }
@@ -107,6 +104,14 @@ function scale_x_y(x, y) {
     x = x / image.pixels.length * 2 - 1
     y = y / image.pixels[0].length * 2 - 1
     return [x, y]
+}
+
+function average(vector) {
+    let total = 0;
+    vector.forEach(element => {
+        total += element;
+    });
+    return total / vector.length;
 }
 
 function spawn_particles() {
