@@ -28,14 +28,14 @@ export const vertex_source = `
       float random_variance = random_nrs.x / 8.0 + 0.03;
 
       // Calculate new postion
-      posxy = posxy - normalize(vector) * movement_factor *  movement_factor * random_variance;
+      posxy = posxy - normalize(vector) * movement_factor *  movement_factor * 0.0;
 
       // Random position wandering
       posxy.x += (sin(posxy.y * 28.0 + time * 3.1415 + random_nrs.y) / (43.0 + random_nrs.x * 7.0)) * movement_factor;
       posxy.y += (sin(posxy.x * 28.0 + time * 3.1415 + random_nrs.z) / (43.0 + random_nrs.x * 7.0)) * movement_factor;
     
       // Pulsating if mouse is close
-      size = mix(size, (sin(time + (random_nrs.x * 6.2830)) + 2.0), movement_factor);
+      //size = mix(size, (sin(time + (random_nrs.x * 6.2830)) + 2.0), movement_factor);
     }
 
     
