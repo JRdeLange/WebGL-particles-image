@@ -32,11 +32,15 @@ export const vertex_source = `
       posxy = posxy - normalize(vector) * movement_factor *  movement_factor * random_variance;
     }
 
+    // Random position wandering
+    posxy.x += sin(posxy.y * 7.0 * 3.1415 + time * 3.1415 + random_nrs.y / 2.0) / (39.0 + random_nrs.x);
+    posxy.y += sin(posxy.x * 7.0 * 3.1415 + time * 3.1415 + random_nrs.z / 2.0) / (39.0 + random_nrs.x);
+
     // Set new position
     gl_Position = vec4(posxy, 0.0, 1.0);
 
     // Size grows and shrinks using a sine with a random offset
-    gl_PointSize = (sin(time + (random_nrs.x * 2.0 * 3.1415)) * 5.0) + 1.0;
+    gl_PointSize = (sin(time + (random_nrs.x * 2.0 * 3.1415)) + 1.0) * 2.0;
     
     // Color is color
     fragcolor = color;
