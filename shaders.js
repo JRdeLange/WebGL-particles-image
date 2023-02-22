@@ -9,11 +9,9 @@ export const vertex_source = `
 
 
   void main() {
-    // Correct the mouse position
-    vec2 correct_mouse = vec2(mouse.x, -mouse.y);
     
     // Calculate vector to mouse
-    vec2 vector = correct_mouse - position;
+    vec2 vector = mouse - position;
     float dist = length(vector);
 
     // Determine new position
@@ -26,21 +24,23 @@ export const vertex_source = `
       float movement_factor = (react_distance - dist) * (1.0/react_distance); 
 
       // Calculate random movement variance
-      float random_variance = random_nrs.x / 10.0 + 0.1;
+      float random_variance = random_nrs.x / 8.0 + 0.03;
 
       // Calculate new postion
       posxy = posxy - normalize(vector) * movement_factor *  movement_factor * random_variance;
+
+      // Random position wandering
+      posxy.x += (sin(posxy.y * 28.0 + time * 3.1415 + random_nrs.y) / (43.0 + random_nrs.x * 7.0)) * movement_factor;
+      posxy.y += (sin(posxy.x * 28.0 + time * 3.1415 + random_nrs.z) / (43.0 + random_nrs.x * 7.0)) * movement_factor;
     }
 
-    // Random position wandering
-    posxy.x += sin(posxy.y * 7.0 * 3.1415 + time * 3.1415 + random_nrs.y / 1.5) / (53.0 + random_nrs.x * 7.0);
-    posxy.y += sin(posxy.x * 7.0 * 3.1415 + time * 3.1415 + random_nrs.z / 1.5) / (53.0 + random_nrs.x * 7.0);
+    
 
     // Set new position
     gl_Position = vec4(posxy, 0.0, 1.0);
 
     // Size grows and shrinks using a sine with a random offset
-    gl_PointSize = (sin(time + (random_nrs.x * 2.0 * 3.1415)) + 1.0) * 2.0;
+    gl_PointSize = (sin(time + (random_nrs.x * 6.2830)) + 2.0) * 2.0;
     
     // Color is color
     fragcolor = color;

@@ -95,7 +95,8 @@ export default class WebGLRenderer{
     }
 
     set_uniforms(time) {
-        let mouse_array = new Float32Array([this.mouse.x, this.mouse.y]);
+        // Invert y to correct mouse position
+        let mouse_array = new Float32Array([this.mouse.x, -this.mouse.y]);
         this.gl.uniform2fv(this.mouse_uniform, mouse_array);
         time = time / 1000;
         this.gl.uniform1f(this.time_uniform, time);

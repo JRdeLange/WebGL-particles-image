@@ -2,6 +2,13 @@ import Particledata from "./particledata.js"
 import WebGLRenderer from "./webgl_renderer.js"
 import Pixels from "./pixels.js"
 
+// CONFIG BITS
+
+const get_color_from_image = true;
+
+
+
+
 // get HTML5 canvas
 let canvas = document.getElementById("canvas");
 canvas.width = window.innerWidth;
@@ -42,7 +49,7 @@ window.addEventListener('touchmove', updateMousePosition);
 
 
 // load sampling image
-let image = new Pixels("./test.png", image_is_loaded)
+let image = new Pixels("./wisse.png", image_is_loaded)
 
 // Image is now loaded
 function image_is_loaded(){
@@ -54,29 +61,33 @@ function image_is_loaded(){
                        [0.020, 0.235, 0.369, 1.0], [0.737, 0.063, 0.333, 1.0],
                        [0.980, 0.376, 0.047, 1.0]];
 
-    for (let index = 0; index < 200000; index++) {
+    for (let index = 0; index < 250000; index++) {
         // generate position based on image
         let x = Math.floor(Math.random() * image.pixels.length)
         let y = Math.floor(Math.random() * image.pixels[0].length)
 
-        while (Math.random() < image.pixels[x][y]) {
+        while (!get_color_from_image && Math.random() < image.pixels[x][y][0]) {
             x = Math.floor(Math.random() * image.pixels.length)
             y = Math.floor(Math.random() * image.pixels[0].length)
         }
 
+        // Determine color randomly from set
+        let color = color_array[Math.floor(Math.random() * color_array.length)];
+        // Or from a source image
+        if (get_color_from_image) {
+            color = image.pixels[x][y];
+        }
+
         // Add a small random offset
-        x += Math.random() - 5
-        y += Math.random() - 5
+        y += Math.random() * 0.4 - 0.2;
+        x += Math.random() * 0.4 - 0.2;
 
         // scale x and y values
-        let pos = scale_x_y(x, y)
-            
-        //generating random values for particle properties
-        let random_color = Math.floor(Math.random() * color_array.length);
+        let pos = scale_x_y(x, y);
 
         //generating new particle in particle array
 
-        particle_data.add_particle(pos, color_array[random_color])      
+        particle_data.add_particle(pos, color);   
     }
 
     // Draw particles

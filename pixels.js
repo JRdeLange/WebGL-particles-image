@@ -19,12 +19,12 @@ export default class Pixels{
                 const row = [];
                 for (let y = 0; y < img_canvas.height; y++) {
                 const offset = (y * img_canvas.width + x) * 4;
-                const r = imageData.data[offset];
-                // const g = imageData.data[offset + 1];
-                // const b = imageData.data[offset + 2];
-                // const a = imageData.data[offset + 3];
-                // row.push([r, g, b, a]);
-                row.push([r / 255])
+                const r = imageData.data[offset] / 255;
+                const g = imageData.data[offset + 1] / 255;
+                const b = imageData.data[offset + 2] / 255;
+                const a = imageData.data[offset + 3] / 255;
+                row.push([r, g, b, a]);
+                ///row.push([r / 255])
                 }
                 pixels.push(row);
             }
