@@ -17,6 +17,7 @@ export const vertex_source = `
     // Determine new position
     vec2 posxy = position;
     float react_distance = 0.6;
+    float size = 2.0;
 
     // If the point is within the react distance
     if (dist < react_distance) {
@@ -32,6 +33,9 @@ export const vertex_source = `
       // Random position wandering
       posxy.x += (sin(posxy.y * 28.0 + time * 3.1415 + random_nrs.y) / (43.0 + random_nrs.x * 7.0)) * movement_factor;
       posxy.y += (sin(posxy.x * 28.0 + time * 3.1415 + random_nrs.z) / (43.0 + random_nrs.x * 7.0)) * movement_factor;
+    
+      // Pulsating if mouse is close
+      size = mix(size, (sin(time + (random_nrs.x * 6.2830)) + 2.0), movement_factor);
     }
 
     
@@ -40,7 +44,7 @@ export const vertex_source = `
     gl_Position = vec4(posxy, 0.0, 1.0);
 
     // Size grows and shrinks using a sine with a random offset
-    gl_PointSize = (sin(time + (random_nrs.x * 6.2830)) + 2.0) * 2.0;
+    gl_PointSize = size;
     
     // Color is color
     fragcolor = color;

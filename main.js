@@ -5,6 +5,7 @@ import Pixels from "./pixels.js"
 // CONFIG BITS
 
 const get_color_from_image = true;
+const random_positions = false;
 
 // get HTML5 canvas
 let canvas = document.getElementById("canvas");
@@ -46,7 +47,7 @@ window.addEventListener('touchmove', updateMousePosition);
 
 
 // load sampling image
-let image = new Pixels("./wisse.png", image_is_loaded)
+let image = new Pixels("./canyon.png", image_is_loaded)
 
 // Image is now loaded
 function image_is_loaded(){
@@ -58,35 +59,62 @@ function image_is_loaded(){
                        [0.020, 0.235, 0.369, 1.0], [0.737, 0.063, 0.333, 1.0],
                        [0.980, 0.376, 0.047, 1.0]];
 
-    for (let index = 0; index < 250000; index++) {
-        // generate position based on image
-        let x = Math.floor(Math.random() * image.pixels.length)
-        let y = Math.floor(Math.random() * image.pixels[0].length)
+    if (random_positions) {
+        for (let index = 0; index < 10000; index++) {
+            
+            // generate position based on image
+            let x = Math.floor(Math.random() * image.pixels.length)
+            let y = Math.floor(Math.random() * image.pixels[0].length)
 
-        while (!get_color_from_image && Math.random() < average(image.pixels[x][y])) {
-            x = Math.floor(Math.random() * image.pixels.length)
-            y = Math.floor(Math.random() * image.pixels[0].length)
+            while (!get_color_from_image && Math.random() < average(image.pixels[x][y])) {
+                x = Math.floor(Math.random() * image.pixels.length)
+                y = Math.floor(Math.random() * image.pixels[0].length)
+            }
+
+            // Determine color randomly from set
+            let color = color_array[Math.floor(Math.random() * color_array.length)];
+            // Or from a source image
+            if (get_color_from_image) {
+                color = image.pixels[x][y];
+            }
+
+            // Add a small random offset
+            y += Math.random() * -0.5;
+            x += Math.random() * -0.5;
+
+            // scale x and y values
+            let pos = scale_x_y(x, y);
+
+            //generating new particle in particle array
+
+            particle_data.add_particle(pos, color);   
         }
+    } else {
+        for (let x = 0; x < image.pixels.length; x++) {
+            for (let y = 0; y < image.pixels[0].length; y++) {
+                // Determine color randomly from set
+                let color = color_array[Math.floor(Math.random() * color_array.length)];
+                // Or from a source image
+                if (get_color_from_image) {
+                    color = image.pixels[x][y];
+                }
 
-        // Determine color randomly from set
-        let color = color_array[Math.floor(Math.random() * color_array.length)];
-        // Or from a source image
-        if (get_color_from_image) {
-            color = image.pixels[x][y];
+                // Add a small random offset
+                //y += Math.random() * -0.5;
+                //x += Math.random() * -0.5;
+
+                // scale x and y values
+                let pos = scale_x_y(x, y);
+
+                //generating new particle in particle array
+
+                particle_data.add_particle(pos, color);   
+            }
+            
         }
-
-        // Add a small random offset
-        y += Math.random() * 0.4 - 0.2;
-        x += Math.random() * 0.4 - 0.2;
-
-        // scale x and y values
-        let pos = scale_x_y(x, y);
-
-        //generating new particle in particle array
-
-        particle_data.add_particle(pos, color);   
     }
 
+    console.log(particle_data.nr);
     // Draw particles
     let renderer = new WebGLRenderer(canvas, particle_data, mouse);
 
