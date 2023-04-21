@@ -1,4 +1,5 @@
-import { vertex_source, fragment_source } from "./shaders.js"
+import { dynamic_vertex_source, fragment_source, old_vertex_source } from "./shaders.js"
+import RenderVars from "./rendervars.js";
 
 export default class WebGLRenderer{
 
@@ -6,6 +7,8 @@ export default class WebGLRenderer{
         this.particle_data = particle_data;
         this.gl = canvas.getContext("experimental-webgl");
         this.mouse = mouse;
+
+        this.render_vars = new RenderVars();
 
         this.date = new Date();
 
@@ -23,6 +26,7 @@ export default class WebGLRenderer{
 
         this.time_uniform = null;
         this.mouse_uniform = null;
+        this.test = null;
         this.get_uniform_locations();
 
         this.fill_buffers();
@@ -100,11 +104,53 @@ export default class WebGLRenderer{
         this.gl.uniform2fv(this.mouse_uniform, mouse_array);
         time = time / 1000;
         this.gl.uniform1f(this.time_uniform, time);
+
+        this.gl.uniform1f(this.test, this.render_vars.react_distance); 
+        this.gl.uniform1f(this.render_vars.size_uniform, this.render_vars.size); 
+        this.gl.uniform1f(this.render_vars.magnification_uniform, this.render_vars.magnification); 
+
+        this.gl.uniform1f(this.render_vars.waves_amplitude_uniform, this.render_vars.waves_amplitude); 
+        this.gl.uniform1f(this.render_vars.waves_amplitude_variation_uniform, this.render_vars.waves_amplitude_variation); 
+        this.gl.uniform1f(this.render_vars.waves_frequency_uniform, this.render_vars.waves_frequency); 
+        this.gl.uniform1f(this.render_vars.waves_speed_uniform, this.render_vars.waves_speed); 
+
+        this.gl.uniform1f(this.render_vars.rippling_amplitude_uniform, this.render_vars.rippling_amplitude); 
+        this.gl.uniform1f(this.render_vars.rippling_amplitude_variation_uniform, this.render_vars.rippling_amplitude_variation); 
+        this.gl.uniform1f(this.render_vars.rippling_frequency_uniform, this.render_vars.rippling_frequency); 
+        this.gl.uniform1f(this.render_vars.rippling_speed_uniform, this.render_vars.rippling_speed); 
+
+        this.gl.uniform1f(this.render_vars.pulsation_amplitude_uniform, this.render_vars.pulsation_amplitude); 
+        this.gl.uniform1f(this.render_vars.pulsation_frequency_uniform, this.render_vars.pulsation_frequency); 
+        this.gl.uniform1f(this.render_vars.pulsation_speed_uniform, this.render_vars.pulsation_speed); 
+
+        this.gl.uniform1f(this.render_vars.repel_distance_uniform, this.render_vars.repel_distance); 
+        this.gl.uniform1f(this.render_vars.repel_variance_uniform, this.render_vars.repel_variance); 
     }
 
     get_uniform_locations() {
         this.time_uniform = this.gl.getUniformLocation(this.shader_program, "time");
         this.mouse_uniform = this.gl.getUniformLocation(this.shader_program, "mouse");
+        
+        this.test = this.gl.getUniformLocation(this.shader_program, "react_distance"); 
+        this.render_vars.size_uniform = this.gl.getUniformLocation(this.shader_program, "size"); 
+        this.render_vars.magnification_uniform = this.gl.getUniformLocation(this.shader_program, "magnification"); 
+
+        this.render_vars.waves_amplitude_uniform = this.gl.getUniformLocation(this.shader_program, "waves_amplitude"); 
+        this.render_vars.waves_amplitude_variation_uniform = this.gl.getUniformLocation(this.shader_program, "waves_amplitude_variation"); 
+        this.render_vars.waves_frequency_uniform = this.gl.getUniformLocation(this.shader_program, "waves_frequency"); 
+        this.render_vars.waves_speed_uniform = this.gl.getUniformLocation(this.shader_program, "waves_speed"); 
+
+        this.render_vars.rippling_amplitude_uniform = this.gl.getUniformLocation(this.shader_program, "rippling_amplitude"); 
+        this.render_vars.rippling_amplitude_variation_uniform = this.gl.getUniformLocation(this.shader_program, "rippling_amplitude_variation"); 
+        this.render_vars.rippling_frequency_uniform = this.gl.getUniformLocation(this.shader_program, "rippling_frequency"); 
+        this.render_vars.rippling_speed_uniform = this.gl.getUniformLocation(this.shader_program, "rippling_speed"); 
+
+        this.render_vars.pulsation_amplitude_uniform = this.gl.getUniformLocation(this.shader_program, "pulsation_amplitude"); 
+        this.render_vars.pulsation_frequency_uniform = this.gl.getUniformLocation(this.shader_program, "pulsation_frequency"); 
+        this.render_vars.pulsation_speed_uniform = this.gl.getUniformLocation(this.shader_program, "pulsation_speed"); 
+
+        this.render_vars.repel_distance_uniform = this.gl.getUniformLocation(this.shader_program, "repel_distance"); 
+        this.render_vars.repel_variance_uniform = this.gl.getUniformLocation(this.shader_program, "repel_variance"); 
     }
 
     make_shaders() {
@@ -112,7 +158,7 @@ export default class WebGLRenderer{
         let vertex = this.gl.createShader(this.gl.VERTEX_SHADER);
         this.gl.shaderSource(fragment, fragment_source);
         this.gl.compileShader(fragment);
-        this.gl.shaderSource(vertex, vertex_source);
+        this.gl.shaderSource(vertex, dynamic_vertex_source);
         this.gl.compileShader(vertex);
         this.gl.attachShader(this.shader_program, vertex);
         this.gl.attachShader(this.shader_program, fragment);

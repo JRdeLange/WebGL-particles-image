@@ -1,3 +1,12 @@
+#container {
+    display: flex;
+}
+
+#config {
+    width: 200px;
+}
+
+
 * {
     margin: 0;
     padding: 0

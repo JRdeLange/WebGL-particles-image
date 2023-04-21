@@ -4,13 +4,17 @@ import Pixels from "./pixels.js"
 
 // CONFIG BITS
 
-const get_color_from_image = true;
-const random_positions = false;
-const image_name = "canyon.png";
+const picture_mode = true;
+const particle_nr = 60000;
+const image_name = "tiny_canyon.png";
+
+
+const get_color_from_image = picture_mode;
+const random_positions = !picture_mode;
 
 // get HTML5 canvas
 let canvas = document.getElementById("canvas");
-canvas.width = window.innerWidth;
+canvas.width = window.innerWidth - 200;
 canvas.height = window.innerHeight;
 
 const canvas_rect = canvas.getBoundingClientRect();
@@ -61,7 +65,7 @@ function image_is_loaded(){
                        [0.980, 0.376, 0.047, 1.0]];
 
     if (random_positions) {
-        for (let index = 0; index < 10000; index++) {
+        for (let index = 0; index < particle_nr; index++) {
             
             // generate position based on image
             let x = Math.floor(Math.random() * image.pixels.length)
@@ -91,13 +95,13 @@ function image_is_loaded(){
             particle_data.add_particle(pos, color);   
         }
     } else {
-        for (let x = 0; x < image.pixels.length; x++) {
-            for (let y = 0; y < image.pixels[0].length; y++) {
+        for (let x = 0; x < image.pixels.length; x+=1.5) {
+            for (let y = 0; y < image.pixels[0].length; y+=1.5) {
                 // Determine color randomly from set
                 let color = color_array[Math.floor(Math.random() * color_array.length)];
                 // Or from a source image
                 if (get_color_from_image) {
-                    color = image.pixels[x][y];
+                    color = image.pixels[Math.floor(x)][Math.floor(y)];
                 }
 
                 // Add a small random offset

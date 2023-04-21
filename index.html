@@ -5,6 +5,51 @@
         <script type="module" src="./main.js" defer></script>
     </head>
     <body>
-        <canvas id="canvas"></canvas>
+        <div id="container">
+            <div id="config">
+                <h3>Misc</h3>
+                <p>react_distance</p>
+                <input type="range" min="0.0" max="2.0" value="0.6" step="0.1" id="react_distance">
+                <p>size</p>
+                <input type="range" min="0.0" max="25.0" value="3.0" id="size">
+                <p>magnification</p>
+                <input type="range" min="-5.0" max="5.0" value="0.0" step="0.1" id="magnification">
+
+                <h3>"Jiggling" waves</h3>
+                <p>waves_amplitude</p>
+                <input type="range" min="0.0" max="100.0" value="40.0" id="waves_amplitude">
+                <p>waves_amplitude_variation</p>
+                <input type="range" min="0.0" max="20.0" value="7.0" id="waves_amplitude_variation">
+                <p>waves_frequency</p>
+                <input type="range" min="0.0" max="100.0" value="30.0" id="waves_frequency">
+                <p>waves_speed</p>
+                <input type="range" min="0.0" max="25.0" value="3.5" id="waves_speed">
+
+                <h3>Positional rippling</h3>
+                <p>rippling_amplitude</p>
+                <input type="range" min="0.0" max="100.0" value="25.0" id="rippling_amplitude">
+                <p>rippling_amplitude_variation</p>
+                <input type="range" min="0.0" max="20.0" value="7.0" id="rippling_amplitude_variation">
+                <p>rippling_frequency</p>
+                <input type="range" min="0.0" max="100.0" value="40.0" id="rippling_frequency">
+                <p>rippling_speed</p>
+                <input type="range" min="0.0" max="25.0" value="10.0" id="rippling_speed">
+
+                <h3>Size pulsation</h3>
+                <p>pulsation_amplitude</p>
+                <input type="range" min="0.0" max="20.0" value="6.0" id="pulsation_amplitude">
+                <p>pulsation_frequency</p>
+                <input type="range" min="0.0" max="100.0" value="6.5" id="pulsation_frequency">
+                <p>pulsation_speed</p>
+                <input type="range" min="0.0" max="100.0" value="5.0" id="pulsation_speed">
+
+                <h3>Particle repelling</h3>
+                <p>repel_distance</p>
+                <input type="range" min="0.0" max="1.0" value="0.03" step="0.01" id="repel_distance">
+                <p>repel_variance</p>
+                <input type="range" min="0.0" max="25.0" value="8.0" id="repel_variance">
+            </div>
+            <canvas id="canvas"></canvas>
+        </div>
     </body>
 </html>
