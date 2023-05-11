@@ -24,7 +24,7 @@ export default class RenderVars{
 
 
         this.react_distance = 0.6;
-        this.size = 6.0;
+        this.size = 3.0;
         this.magnification = 0.0;
 
         this.waves_amplitude = 0.0;
