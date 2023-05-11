@@ -6,7 +6,7 @@ import Pixels from "./pixels.js"
 
 const picture_mode = true;
 const particle_nr = 60000;
-const image_name = "tiny_canyon.png";
+const image_name = "small_canyon.png";
 
 
 const get_color_from_image = picture_mode;

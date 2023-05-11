@@ -1,11 +1,29 @@
 #container {
+    width: 100%;
     display: flex;
 }
 
 #config {
-    width: 200px;
+    width: 20%;
 }
 
+#canvas {
+    width: 80%;
+}
+
+h2 {
+    border: 3px solid black;
+    border-radius: 5px;
+    margin: 4px;
+    padding: 5px;
+}
+
+.effect {
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+}
 
 * {
     margin: 0;

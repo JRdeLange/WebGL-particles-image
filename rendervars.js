@@ -27,22 +27,22 @@ export default class RenderVars{
         this.size = 6.0;
         this.magnification = 0.0;
 
-        this.waves_amplitude = 40.0;
-        this.waves_amplitude_variation = 7.0;
-        this.waves_frequency = 30.0;
+        this.waves_amplitude = 0.0;
+        this.waves_amplitude_variation = 0.02;
+        this.waves_frequency = 15.0;
         this.waves_speed = 3.5;
 
-        this.rippling_amplitude = 25.0;
-        this.rippling_amplitude_variation = 7.0;
-        this.rippling_frequency = 40.0;
-        this.rippling_speed = 10.0;
+        this.rippling_amplitude = 0.0;
+        this.rippling_amplitude_variation = 0.02;
+        this.rippling_frequency = 25.0;
+        this.rippling_speed = 3.5;
 
-        this.pulsation_amplitude = 6.0;
-        this.pulsation_frequency = 6.5;
-        this.pulsation_speed = 5.0;
+        this.pulsation_amplitude = 0.0;
+        this.pulsation_frequency = 15.0;
+        this.pulsation_speed = 2.0;
 
-        this.repel_distance = 0.03;
-        this.repel_variance = 8.0;
+        this.repel_distance = 0.25;
+        this.repel_variance = 0.02;
 
 
         this.react_distance_slider = document.getElementById("react_distance");
@@ -60,12 +60,12 @@ export default class RenderVars{
 
         this.waves_amplitude_slider = document.getElementById("waves_amplitude");
         this.waves_amplitude_slider.oninput = (event) => {
-            this.waves_amplitude = parseFloat(event.target.value) / 100;
+            this.waves_amplitude = parseFloat(event.target.value);
         }
-        this.waves_amplitude_variation_slider = document.getElementById("waves_amplitude_variation");
-        this.waves_amplitude_variation_slider.oninput = (event) => {
-            this.waves_amplitude_variation = parseFloat(event.target.value) / 100;
-        }
+        //this.waves_amplitude_variation_slider = document.getElementById("waves_amplitude_variation");
+        //this.waves_amplitude_variation_slider.oninput = (event) => {
+        //    this.waves_amplitude_variation = parseFloat(event.target.value);
+        //}
         this.waves_frequency_slider = document.getElementById("waves_frequency");
         this.waves_frequency_slider.oninput = (event) => {
             this.waves_frequency = parseFloat(event.target.value);
@@ -77,12 +77,12 @@ export default class RenderVars{
 
         this.rippling_amplitude_slider = document.getElementById("rippling_amplitude");
         this.rippling_amplitude_slider.oninput = (event) => {
-            this.rippling_amplitude = 100 - parseFloat(event.target.value) / 100;
+            this.rippling_amplitude = parseFloat(event.target.value);
         }
-        this.rippling_amplitude_variation_slider = document.getElementById("rippling_amplitude_variation");
-        this.rippling_amplitude_variation_slider.oninput = (event) => {
-            this.rippling_amplitude_variation = parseFloat(event.target.value) / 100;
-        }
+        //this.rippling_amplitude_variation_slider = document.getElementById("rippling_amplitude_variation");
+        //this.rippling_amplitude_variation_slider.oninput = (event) => {
+        //    this.rippling_amplitude_variation = parseFloat(event.target.value);
+        //}
         this.rippling_frequency_slider = document.getElementById("rippling_frequency");
         this.rippling_frequency_slider.oninput = (event) => {
             this.rippling_frequency = parseFloat(event.target.value);
@@ -109,10 +109,10 @@ export default class RenderVars{
         this.repel_distance_slider.oninput = (event) => {
             this.repel_distance = parseFloat(event.target.value);
         }
-        this.repel_variance_slider = document.getElementById("repel_variance");
-        this.repel_variance_slider.oninput = (event) => {
-            this.repel_variance = 25 - parseFloat(event.target.value);
-        }
+        //this.repel_variance_slider = document.getElementById("repel_variance");
+        //this.repel_variance_slider.oninput = (event) => {
+        //    this.repel_variance = parseFloat(event.target.value);
+        //}
 
     }
 

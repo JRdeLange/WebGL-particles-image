@@ -44,29 +44,30 @@ export const dynamic_vertex_source = `
       float mf2 = movement_factor * movement_factor;
 
       // Calculate random repel variance
-      float random_repel_variance = random_nrs.x / repel_variance + repel_distance;
+      float random_repel_variance = repel_distance + random_nrs.x * repel_variance;
 
       // Repel
-      posxy = posxy - normalize(vector) * mf2 * random_repel_variance;
+      posxy = posxy - normalize(vector) * mf2 * random_repel_variance * repel_distance;
 
       // Wavyness
-      posxy.x += (sin(position.y * waves_frequency + time * waves_speed + random_nrs.y) * 
-        (waves_amplitude + random_nrs.x * waves_amplitude_variation)) * mf2;
-      posxy.y += (sin(position.x * waves_frequency + time * waves_speed + random_nrs.z) * 
-        (waves_amplitude + random_nrs.x * waves_amplitude_variation)) * mf2;
+      posxy.x += (sin(position.y * waves_frequency + time * waves_speed) * 
+        (waves_amplitude + random_nrs.x * waves_amplitude_variation * waves_amplitude)) * mf2;
+      posxy.y += (sin(position.x * waves_frequency + time * waves_speed) * 
+        (waves_amplitude + random_nrs.x * waves_amplitude_variation * waves_amplitude)) * mf2;
 
       // Magnification
       posxy -= magnification * (vector * mf2);
 
       // Rippling
       posxy -= vector * ((sin((react_distance - dist) * rippling_frequency + time * rippling_speed + random_nrs.y) *
-        (rippling_amplitude + random_nrs.x * rippling_amplitude_variation)) * mf2);
+        (rippling_amplitude + random_nrs.x * rippling_amplitude_variation * rippling_amplitude)) * mf2);
     
       // Pulsating if mouse is close
-      float new_pos_to_mouse = length(mouse - posxy);
-      //new_size = mix(size, (sin(time * pulsation_speed - (new_pos_to_mouse) * pulsation_frequency + random_nrs.y) + 1.0) * 0.5 * size, sqrt(movement_factor));
+      if (pulsation_amplitude > 0.0){
+        float new_pos_to_mouse = length(mouse - posxy);
+        new_size = mix(size, (pulsation_amplitude * sin(time * pulsation_speed - (new_pos_to_mouse) * pulsation_frequency + random_nrs.y) + 1.0) * 0.5 * size, sqrt(movement_factor));
+      }
     }
-
     // Set new position
     gl_Position = vec4(posxy, 0.0, 1.0);
 

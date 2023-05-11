@@ -125,6 +125,8 @@ export default class WebGLRenderer{
 
         this.gl.uniform1f(this.render_vars.repel_distance_uniform, this.render_vars.repel_distance); 
         this.gl.uniform1f(this.render_vars.repel_variance_uniform, this.render_vars.repel_variance); 
+
+        
     }
 
     get_uniform_locations() {
