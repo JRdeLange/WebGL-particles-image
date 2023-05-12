@@ -27,10 +27,10 @@ export default class RenderVars{
         this.size = 3.0;
         this.magnification = 0.0;
 
-        this.waves_amplitude = 0.0;
+        this.waves_amplitude = 0.2;
         this.waves_amplitude_variation = 0.02;
-        this.waves_frequency = 15.0;
-        this.waves_speed = 3.5;
+        this.waves_frequency = 10.0;
+        this.waves_speed = 2.5;
 
         this.rippling_amplitude = 0.0;
         this.rippling_amplitude_variation = 0.02;
@@ -41,7 +41,7 @@ export default class RenderVars{
         this.pulsation_frequency = 15.0;
         this.pulsation_speed = 2.0;
 
-        this.repel_distance = 0.25;
+        this.repel_distance = 0.0;
         this.repel_variance = 0.02;
 
 
