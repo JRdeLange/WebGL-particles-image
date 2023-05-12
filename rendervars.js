@@ -23,13 +23,13 @@ export default class RenderVars{
         this.repel_variance_uniform = null;
 
 
-        this.react_distance = 0.6;
-        this.size = 3.0;
+        this.react_distance = 1.0;
+        this.size = 4.0;
         this.magnification = 0.0;
 
-        this.waves_amplitude = 0.2;
+        this.waves_amplitude = 0.3;
         this.waves_amplitude_variation = 0.02;
-        this.waves_frequency = 10.0;
+        this.waves_frequency = 15.0;
         this.waves_speed = 2.5;
 
         this.rippling_amplitude = 0.0;
