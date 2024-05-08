@@ -1,4 +1,4 @@
-This project is live on https://jrdelange.github.io/Learning_WebGL/
+This project is live on https://jrdelange.github.io/WebGL-particles-image/
 
 
 # General idea
